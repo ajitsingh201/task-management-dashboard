@@ -73,25 +73,7 @@ taskflow-dashboard/
 └── vite.config.js
 ```
 
----
 
-## Getting Started
-
-```bash
-# 1. Install dependencies
-npm install
-
-# 2. Start dev server (opens at http://localhost:3000)
-npm run dev
-
-# 3. Build for production
-npm run build
-
-# 4. Preview production build
-npm run preview
-```
-
----
 
 ## Features
 
