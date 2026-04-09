@@ -1,7 +1,7 @@
 import SearchBar from '../SearchBar/SearchBar';
 import styles from './Header.module.css';
 
-const Header = ({ searchQuery, onSearchChange, onNewTaskClick }) => (
+const Header = ({ searchQuery, onSearchChange, onNewTaskClick, theme, onThemeToggle }) => (
   <header className={styles.header}>
     <div className={styles.inner}>
       <div className={styles.logo}>
@@ -17,6 +17,15 @@ const Header = ({ searchQuery, onSearchChange, onNewTaskClick }) => (
       </div>
 
       <div className={styles.spacer} />
+
+      <button
+        className={styles.themeToggle}
+        onClick={onThemeToggle}
+        aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+        title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+      >
+        {theme === 'dark' ? '☀️' : '🌙'}
+      </button>
 
       <button className="btn-primary" onClick={onNewTaskClick} aria-label="Create new task">
         <span className={styles.plusIcon} aria-hidden="true">+</span>

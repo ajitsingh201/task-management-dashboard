@@ -5,6 +5,7 @@ import { applyFilters, computeStats } from './utils/helpers';
 
 import useDebounce from './hooks/useDebounce';
 import useToast from './hooks/useToast';
+import useTheme from './hooks/useTheme';
 
 import Header from './components/Header/Header';
 import StatsBar from './components/StatsBar/StatsBar';
@@ -35,7 +36,7 @@ const ErrorBanner = ({ message, onRetry }) => (
         <p style={{ color: '#EF4444', fontWeight: 700, fontSize: 14, margin: 0 }}>
           Failed to load tasks
         </p>
-        <p style={{ color: '#94A3B8', fontSize: 13, margin: '3px 0 0' }}>{message}</p>
+        <p style={{ color: 'var(--text-secondary)', fontSize: 13, margin: '3px 0 0' }}>{message}</p>
       </div>
     </div>
     <button className="btn-ghost" onClick={onRetry} style={{ flexShrink: 0 }}>
@@ -46,11 +47,11 @@ const ErrorBanner = ({ message, onRetry }) => (
 
 const ResultsMeta = ({ shown, total, query }) => (
   <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-    <p style={{ color: '#4B5563', fontSize: 13, margin: 0 }}>
+    <p style={{ color: 'var(--text-muted)', fontSize: 13, margin: 0 }}>
       Showing{' '}
-      <strong style={{ color: '#94A3B8' }}>{shown}</strong>
+      <strong style={{ color: 'var(--text-secondary)' }}>{shown}</strong>
       {' '}of{' '}
-      <strong style={{ color: '#94A3B8' }}>{total}</strong>
+      <strong style={{ color: 'var(--text-secondary)' }}>{total}</strong>
       {' '}tasks
     </p>
     {query && (
@@ -75,8 +76,10 @@ const App = () => {
   const [sortOrder, setSortOrder] = useState('none');
   const [selectedTask, setSelectedTask] = useState(null);
   const [fetchTick, setFetchTick] = useState(0);
+  const [addFormOpen, setAddFormOpen] = useState(false);
 
   const { toasts, push: toast } = useToast();
+  const { theme, toggleTheme } = useTheme();
   const debouncedQuery = useDebounce(searchQuery, 350);
 
   useEffect(() => {
@@ -146,7 +149,10 @@ const App = () => {
   }, []);
 
   const handleNewTaskClick = useCallback(() => {
-    document.getElementById('add-task-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setAddFormOpen(true);
+    setTimeout(() => {
+      document.getElementById('add-task-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
   }, []);
 
   const hasActiveFilter = debouncedQuery || filterStatus !== 'all' || sortOrder !== 'none';
@@ -162,12 +168,14 @@ const App = () => {
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
           onNewTaskClick={handleNewTaskClick}
+          theme={theme}
+          onThemeToggle={toggleTheme}
         />
 
         <main className="main-content" id="main">
           {!loading && !error && <StatsBar stats={stats} />}
 
-          <AddTaskForm onAdd={handleAddTask} onToast={toast} />
+          <AddTaskForm onAdd={handleAddTask} onToast={toast} open={addFormOpen} onOpenChange={setAddFormOpen} />
 
           <FilterSortControls
             filterStatus={filterStatus}

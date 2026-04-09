@@ -38,7 +38,7 @@
 
 .select {
   appearance: none;
-  background: rgba(0, 0, 0, 0.35);
+  background: var(--bg-input);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-md);
   color: var(--text-secondary);
@@ -54,7 +54,7 @@
 }
 .select:hover { border-color: var(--border-hover); color: var(--text-primary); }
 .select:focus { border-color: var(--border-focus); box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
-.select option { background: #1E293B; }
+.select option { background: var(--select-option-bg); color: var(--text-primary); }
 
 .clearBtn {
   padding: 6px 13px;

@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: 900;
-  background: rgba(0, 0, 0, 0.72);
+  background: var(--modal-overlay-bg);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   display: flex;
@@ -59,7 +59,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--bg-subtle);
   border: 1px solid var(--border-default);
   color: var(--text-secondary);
   cursor: pointer;
@@ -71,7 +71,7 @@
   line-height: 1;
 }
 .closeBtn:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--bg-card-hover);
   color: var(--text-primary);
   border-color: var(--border-hover);
 }
@@ -90,7 +90,7 @@
   align-items: center;
   gap: 14px;
   padding: 14px 16px;
-  background: rgba(0, 0, 0, 0.22);
+  background: var(--bg-inset);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-md);
 }
@@ -140,7 +140,7 @@
 }
 
 .metaCell {
-  background: rgba(0, 0, 0, 0.22);
+  background: var(--bg-inset);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-md);
   padding: 12px 14px;
@@ -179,7 +179,7 @@
 }
 
 .kbd {
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--bg-subtle);
   border: 1px solid var(--border-default);
   border-radius: 5px;
   padding: 1px 6px;

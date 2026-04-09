@@ -16,8 +16,7 @@ const FormField = ({ label, error, children }) => (
   </div>
 );
 
-const AddTaskForm = ({ onAdd, onToast }) => {
-  const [open, setOpen] = useState(false);
+const AddTaskForm = ({ onAdd, onToast, open, onOpenChange }) => {
   const [title, setTitle] = useState('');
   const [userId, setUserId] = useState('');
   const [errors, setErrors] = useState({});
@@ -30,7 +29,7 @@ const AddTaskForm = ({ onAdd, onToast }) => {
   }, [open]);
 
   const handleClose = () => {
-    setOpen(false);
+    onOpenChange(false);
     setTitle('');
     setUserId('');
     setErrors({});
@@ -65,7 +64,7 @@ const AddTaskForm = ({ onAdd, onToast }) => {
     <div className={styles.wrapper} id="add-task-form">
       <button
         className={styles.toggle}
-        onClick={() => (open ? handleClose() : setOpen(true))}
+        onClick={() => (open ? handleClose() : onOpenChange(true))}
         aria-expanded={open}
         aria-controls="add-task-body"
         type="button"
